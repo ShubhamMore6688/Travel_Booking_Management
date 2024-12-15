@@ -18,6 +18,9 @@ config({
     path: './config/data.env'
 })
 
+//database connection
+ConnectDB()
+
 // routes configuration
 app.use(packageRouter);
 app.use('/admin', adminRouter);
@@ -28,8 +31,7 @@ app.get('/', (req, res)=>{
     })
 })
 
-//database connection
-ConnectDB()
+
 
 app.listen(3000, ()=>{
     console.log("server is up and running")
