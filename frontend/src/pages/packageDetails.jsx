@@ -6,20 +6,29 @@ function PackageDetails() {
     const {id} = useParams();
     const [packageDetail, setPackageDetail] = useState();
     const navigate = useNavigate();
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
     useEffect( ()=>{
 
         const getPackageDetail = async () => {
            try {
-                const response = await axios.get(`http://localhost:3000/packages/${id}`)
-                
+      
+                const response = await axios.get(`${backendUrl}/packages/${id}`)
+                console.log(response.data.myPackage)
                 setPackageDetail(response.data.myPackage)
            } catch (error) {
                 console.error("something went wrong", error)
            }
         } 
 
-        getPackageDetail();
-    })
+        if (id) {
+            getPackageDetail();
+        }
+    }, [id])
+
+    if (!packageDetail) {
+        return <div>Loading...</div>;
+      }
   return (
     <div className="container mx-auto my-10 bg-gray-100 p-6 rounded shadow-lg">
       <h1 className="text-3xl font-bold mb-4">{packageDetail.title}</h1>

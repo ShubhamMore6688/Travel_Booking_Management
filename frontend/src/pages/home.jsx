@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 
 function Home() {
     const [packagedata, setPackageData] = useState([]);
-
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     useEffect(() => {
         const retrivePackages = async () => {
             try {
-                const response = await axios.get("http://localhost:3000/packages")
+               
+                const response = await axios.get(`${backendUrl}/packages`)
                 setPackageData(response.data.packages)
             } catch (error) {
                 console.error("something went wrong", error)

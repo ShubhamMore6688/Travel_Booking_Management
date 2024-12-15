@@ -5,6 +5,7 @@ import { useSearchParams } from "react-router-dom"
 function BookingForm() {
     const [searchParams] = useSearchParams();
     const packageId = searchParams.get("packageId");
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
     const [formData, setFormData] = useState({
         customerName: "",
@@ -19,7 +20,7 @@ function BookingForm() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:3000/bookings", {
+      await axios.post(`${backendUrl}/bookings`, {
         ...formData,
         packageId,
       });
