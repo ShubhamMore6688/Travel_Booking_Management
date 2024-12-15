@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 function BookingForm() {
     const [searchParams] = useSearchParams();
@@ -15,16 +15,22 @@ function BookingForm() {
         specialRequests: "",
       });
       const [successMessage, setSuccessMessage] = useState("");
-
+      const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await axios.post(`${backendUrl}/bookings`, {
+      const response = await axios.post(`${backendUrl}/bookings`, {
         ...formData,
         packageId,
       });
+      console.log(response.data.booking._id)
       setSuccessMessage("Booking successful!");
+      
+      // navigate to the invoice page
+      const bookingId = response.data.booking._id;
+      navigate(`/invoice/${bookingId}`);
+      
       setFormData({
         customerName: "",
         email: "",
