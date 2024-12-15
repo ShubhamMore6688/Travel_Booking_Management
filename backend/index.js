@@ -22,8 +22,34 @@ ConnectDB()
 
 // routes configuration
 app.use(packageRouter);
-app.use('/admin', adminRouter);
 
+
+// Hardcoded Admin Credentials
+const adminCredentials = {
+    username: 'admin',
+    password: 'admin123' // In a real application, use bcryptjs to hash passwords
+  };
+  
+  // Basic Authentication Middleware
+  const basicAuth = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    if (!authHeader) return res.status(401).send('Authentication required');
+  
+    const [username, password] = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+    
+    if (username === adminCredentials.username && password === adminCredentials.password) {
+      next();
+    } else {
+      res.status(403).send('Forbidden');
+    }
+  };
+  
+  // Use the authentication middleware for all routes starting with `/admin`
+  app.use('/admin', basicAuth);
+  
+  // Route for packages
+app.use('/admin', adminRouter);
+  
 
 // test route for backend
 app.get('/', (req, res)=>{
