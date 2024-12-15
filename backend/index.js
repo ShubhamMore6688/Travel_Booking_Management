@@ -3,11 +3,14 @@ import ConnectDB from "./config/database.js";
 import { config } from "dotenv";
 import packageRouter from "./routes/package.js"
 import adminRouter from "./routes/admin.js"
-
+import cors from "cors"
 
 
 const app = express();
-
+app.use(cors({
+    origin: "*",
+    credentials: false
+}))
 app.use(express.json())
 
 // environment variable configuration
