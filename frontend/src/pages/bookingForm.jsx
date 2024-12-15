@@ -3,8 +3,9 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom"
 
 function BookingForm() {
-    const searchParam = useSearchParams();
-    const packageId = searchParam.length("packageId")
+    const [searchParams] = useSearchParams();
+    const packageId = searchParams.get("packageId");
+
     const [formData, setFormData] = useState({
         customerName: "",
         email: "",
@@ -18,7 +19,7 @@ function BookingForm() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/bookings", {
+      await axios.post("http://localhost:3000/bookings", {
         ...formData,
         packageId,
       });

@@ -26,15 +26,15 @@ function Home() {
             key={pkg._id}
             className="bg-white rounded-lg shadow-lg p-5 hover:shadow-2xl transition"
           >
-            <h2 className="text-xl font-semibold mb-3">{pkg.name}</h2>
+            <h2 className="text-xl font-semibold mb-3">{pkg.title}</h2>
             <p className="text-gray-600 mb-3">{pkg.description}</p>
             <p className="font-bold text-lg mb-5">₹{pkg.price}</p>
-            {/* <Link
+            <Link
               to={`/packages/${pkg._id}`}
               className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
             >
               View Details
-            </Link> */}
+            </Link>
           </div>
         ))}
       </div>
