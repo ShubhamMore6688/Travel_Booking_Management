@@ -3,7 +3,7 @@ import { addPackage, deletePackage, updatePacakge } from "../controllers/adminCo
 
 const router = express.Router();
 
-router.get('/packages', addPackage) // add new package
+router.post('/packages', addPackage) // add new package
 router.put('/packages/:id', updatePacakge) // update package
 router.delete('/packages/:id', deletePackage) // delete package
 

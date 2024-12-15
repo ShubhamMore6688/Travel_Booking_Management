@@ -1,4 +1,4 @@
-import { packageModel } from "../models/package";
+import { packageModel } from "../models/package.js";
 
 export const addPackage = async (req, res) => {
     try {

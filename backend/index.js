@@ -8,6 +8,8 @@ import adminRouter from "./routes/admin.js"
 
 const app = express();
 
+app.use(express.json())
+
 // environment variable configuration
 config({
     path: './config/data.env'
