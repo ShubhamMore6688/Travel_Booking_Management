@@ -24,6 +24,7 @@ function PackageDetails() {
         if (id) {
             getPackageDetail();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
     if (!packageDetail) {

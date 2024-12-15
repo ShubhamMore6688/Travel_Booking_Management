@@ -7,6 +7,8 @@ import cors from "cors"
 
 
 const app = express();
+
+// adding cors
 app.use(cors())
 app.use(express.json())
 
@@ -22,6 +24,8 @@ ConnectDB()
 app.use(packageRouter);
 app.use('/admin', adminRouter);
 
+
+// test route for backend
 app.get('/', (req, res)=>{
     return res.json({
         message: "server is up and running"
