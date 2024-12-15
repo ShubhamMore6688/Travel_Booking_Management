@@ -46,3 +46,34 @@ export const createBooking = async (req, res) => {
         })
   }
 };
+
+
+export const getBookingDetails = async (req, res) =>{
+  try {
+    const {id} = req.params;
+    const responseData = await bookingModel.findById(id);
+    const bookingDetail = responseData.toObject();
+    if(!bookingDetail){
+      return res.status(404).json({
+        success: false,
+        message: "booking not found"
+      })
+    }
+
+    const packageDetail = await packageModel.findById(bookingDetail.packageId);
+    bookingDetail.packageName = packageDetail.title
+
+    
+    res.status(200).json({
+      success: true,
+      bookingDetail
+    })
+
+  } catch (error) {
+       res.status(500).json({
+            success: false,
+            message: "internal server error",
+            
+      })
+  }
+}
