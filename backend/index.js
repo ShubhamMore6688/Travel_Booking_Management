@@ -7,10 +7,7 @@ import cors from "cors"
 
 
 const app = express();
-app.use(cors({
-    origin: "*",
-    credentials: false
-}))
+app.use(cors())
 app.use(express.json())
 
 // environment variable configuration
